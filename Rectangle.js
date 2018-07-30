@@ -35,4 +35,5 @@ function Rectangle(width,height,color,x,y) { //width, height,color,x pos, y pos
         return crash;
     }
 
+
 }

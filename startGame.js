@@ -4,7 +4,7 @@ var myObstacles = [];
 function startGame() {
 
     myGamePiece = new Rectangle(30,30,"blue",300,120);    //player
-    myObstacle = new Rectangle(40,40,"red",50,160);    //obstacle
+
     myGameArea.start();
 }
 var myGameArea = {
@@ -15,7 +15,7 @@ var myGameArea = {
         this.canvas.height = 800;
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
+        this.interval = setInterval(updateGameArea, 30);
         window.addEventListener('keydown', function (e) {
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = true;
