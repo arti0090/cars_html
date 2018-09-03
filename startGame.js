@@ -1,13 +1,15 @@
 var myGamePiece;
 var myObstacles = [];
+var myScore;
+var myGameArea;
 
 function startGame() {
-
-    myGamePiece = new Rectangle(30,30,"blue",300,120);    //player
-
+    
+    myGamePiece = new Rectangle(30,30,"blue",300,600);    //player
+    myScore = new Rectangle("30px", "Consolas", "black", 400, 40, "text");
     myGameArea.start();
 }
-var myGameArea = {
+myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.context = this.canvas.getContext("2d");

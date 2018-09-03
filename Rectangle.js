@@ -1,4 +1,5 @@
-function Rectangle(width,height,color,x,y) { //width, height,color,x pos, y pos
+function Rectangle(width,height,color,x,y,type) { //width, height,color,x pos, y pos
+    this.type = type;
     this.width = width;
     this.height = height;
     this.x = x;
@@ -7,9 +8,16 @@ function Rectangle(width,height,color,x,y) { //width, height,color,x pos, y pos
     this.speedY = 0;
     this.update = function () {
         ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+          } else {
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
+}
+
 
     this.newPos = function() {
         this.x += this.speedX;

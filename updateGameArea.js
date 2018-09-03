@@ -3,14 +3,18 @@ var myObstacles = [];
 var myEnemies = [];
 
 
+
 function updateGameArea() {
 
+    var gameAreaWidth = myGameArea.canvas.width;
+    var gameAreaHeight = myGameArea.canvas.height;
+    var score = 0;
 
     var x, y;
-    var  sideWall1 = new Rectangle(10,myGameArea.canvas.height,"red",10,0);
-    var  sideWall2 = new Rectangle(10,myGameArea.canvas.height,"red",myGameArea.canvas.width-20,0);
+    var  sideWall1 = new Rectangle(10,gameAreaHeight,"red",10,0);
+    var  sideWall2 = new Rectangle(10,gameAreaHeight,"red",gameAreaWidth-20,0);
     var EnemyCar = new Rectangle(30, 50, "orange", 200, -50);
-    var EnemyTruck = new Rectangle(50,70,"orange", 500, -50);
+    var EnemyTruck = new Rectangle(50,70,"brown", Math.floor(Math.random()*(gameAreaWidth-100)), -50);
 
     for (i = 0; i < myEnemies.length; i++) {
         if (myGamePiece.crashWith(myEnemies[i])) {
@@ -40,25 +44,32 @@ function updateGameArea() {
     myObstacles.push(sideWall2);
 
     if (myGameArea.frameNo === 1  || everyInterval(150)) {
-        x = myGameArea.canvas.width -600;
+        x = myGameArea.canvas.width - 600;
         y = myGameArea.canvas.height + 100;
 
-        myObstacles.push(new Rectangle(10,200,"red",10,-150));
-        myObstacles.push(new Rectangle(10,200,"red",580,-150));
-        myEnemies.push(new Rectangle(30,30,"purple",40,-150));
+        myObstacles.push(new Rectangle(10, 200, "red", 10, -150));
+        myObstacles.push(new Rectangle(10, 200, "red", 580, -150));
+        myEnemies.push(new Rectangle(30, 30, "purple", 40, -150));
         myEnemies.push(EnemyCar);
-        myEnemies.push(EnemyTruck);
+    }
+    if (myGameArea.frameNo % 60 == 0 )
+    {
+        myEnemies.push(EnemyTruck)
+    }
+    if (myGameArea.frameNo % 10 == 0)
+    {
+        score ++;
     }
 
 
     for(i = 0; i<myEnemies.length; i++) {
-        myEnemies[i].y += 2;
+        myEnemies[i].y += 3;
         myEnemies[i].update();
     }
 
 
     for(i = 0; i<myObstacles.length; i++) {
-            myObstacles[i].y += 1;
+            myObstacles[i].y += 2;
             myObstacles[i].update();
         }
 
@@ -67,6 +78,8 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -5; }
     if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 5; }
 
+    myScore.text="SCORE: " + (myGameArea.frameNo/10).toFixed(0);
+    myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
 
